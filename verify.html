@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>Certificate Verification</title>
@@ -30,61 +30,66 @@ body{
 
 <body>
 
+<!-- ROOT MUST COME BEFORE SCRIPT -->
 <div id="root">Loading...</div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function(){
-
-<script>
-document.addEventListener("DOMContentLoaded", function(){
-
-  const data = {
-    "001": {
-      name: "Sarah",
-      course: "Web Development",
-      instructor: "Sharfia",
-      date: "April 2024"
+const data = {
+  "001": {
+    name: "Sarah",
+    course: "Web Development",
+    instructor: "Sharfia",
+    date: "April 2024"
+  },
+  "002": {
+    name: "Ayesha",
+    course: "Web Development",
+    instructor: "Sharfia",
+    date: "April 2024"
+  },
+  "003": {
+    name: "Sharfia",
+    course: "Web Development",
+    instructor: "Sharfia",
+    date: "April 2024"
     },
-    "002": {
-      name: "Ayesha",
-      course: "Web Development",
-      instructor: "Sharfia",
-      date: "April 2024"
-    },
-    "003": {
-      name: "Sharfia",
-      course: "Web Development",
-      instructor: "Sharfia",
-      date: "April 2024"
-    }
-  };
+  "004": {
+    name: "Chaarvi",
+    course: "Web Development",
+    instructor: "Sharfia",
+    date: "April 2024"
+  },
+};
 
-  const params = new URLSearchParams(window.location.search);
-  const id = params.get("id");
-  const root = document.getElementById("root");
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+const root = document.getElementById("root");
 
-  if(id && data[id]){
-    const c = data[id];
-    root.innerHTML = `
-      <div class="card">
-        <h2>Certificate Verified ✅</h2>
-        <p><b>Name:</b> ${c.name}</p>
-        <p><b>Course:</b> ${c.course}</p>
-        <p><b>Instructor:</b> ${c.instructor}</p>
-        <p><b>Date:</b> ${c.date}</p>
-        <p><b>Certificate ID:</b> ${id}</p>
-      </div>
-    `;
-  } else {
-    root.innerHTML = `
-      <div class="card">
-        <h2>Invalid Certificate ❌</h2>
-        <p>No record found.</p>
-      </div>
-    `;
-  }
-
-});
+if (id && data[id]) {
+  const c = data[id];
+  root.innerHTML = `
+    <div class="card">
+      <h2>Certificate Verified ✅</h2>
+      <p class="success">This certificate is authentic</p>
+      <p><b>Name:</b> ${c.name}</p>
+      <p><b>Course:</b> ${c.course}</p>
+      <p><b>Instructor:</b> ${c.instructor}</p>
+      <p><b>Date:</b> ${c.date}</p>
+      <p><b>Certificate ID:</b> ${id}</p>
+    </div>
+  `;
+} else {
+  root.innerHTML = `
+    <div class="card">
+      <h2 class="error">Invalid Certificate ❌</h2>
+      <p>No record found.</p>
+    </div>
+  `;
+}
 </script>
+
+</body>
+</html>
+
 
 
