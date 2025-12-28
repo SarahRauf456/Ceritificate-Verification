@@ -1,9 +1,75 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Test</title>
+<meta charset="UTF-8">
+<title>Certificate Verification</title>
+
+<style>
+body{
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#050b1f,#0b1a3a);
+  font-family:Arial, sans-serif;
+  color:#fff;
+}
+.card{
+  background:rgba(255,255,255,0.08);
+  padding:30px;
+  border-radius:16px;
+  max-width:480px;
+  width:90%;
+  text-align:center;
+}
+h2{color:#00eaff}
+.ok{color:#4caf50}
+.err{color:#ff5252}
+</style>
+
 </head>
-<body style="background:black;color:white;text-align:center;padding-top:50px;">
-  <h1>GitHub Pages is Working ✅</h1>
+<body>
+
+<div id="app">Loading...</div>
+
+<script>
+const certificates = {
+  "WD-001": {
+    name: "Sarah Sharma",
+    course: "Web Development",
+    instructor: "Sharfia",
+    date: "April 2024"
+  }
+};
+
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+const app = document.getElementById("app");
+
+if(id && certificates[id]){
+  const c = certificates[id];
+  app.innerHTML = `
+    <div class="card">
+      <h2>Certificate Verified ✅</h2>
+      <p class="ok">This certificate is authentic</p>
+      <p><b>Name:</b> ${c.name}</p>
+      <p><b>Course:</b> ${c.course}</p>
+      <p><b>Instructor:</b> ${c.instructor}</p>
+      <p><b>Date:</b> ${c.date}</p>
+      <p><b>Certificate ID:</b> ${id}</p>
+    </div>
+  `;
+}else{
+  app.innerHTML = `
+    <div class="card">
+      <h2 class="err">Invalid Certificate ❌</h2>
+      <p>No record found</p>
+    </div>
+  `;
+}
+</script>
+
 </body>
 </html>
+
