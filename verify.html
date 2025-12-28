@@ -19,8 +19,8 @@ body{
   background:rgba(255,255,255,0.08);
   padding:30px;
   border-radius:16px;
-  max-width:480px;
   width:90%;
+  max-width:480px;
   text-align:center;
 }
 h2{color:#00eaff}
@@ -31,13 +31,16 @@ h2{color:#00eaff}
 </head>
 <body>
 
-<div id="app">Loading...</div>
+<div id="app">
+  <h2>Certificate Verification</h2>
+  <p>Loading certificate details...</p>
+</div>
 
 <script>
 const certificates = {
   "WD-001": {
     name: "Sarah Sharma",
-    course: "Web Development",
+    course: "Web Development – Build Your First Website",
     instructor: "Sharfia",
     date: "April 2024"
   }
@@ -47,24 +50,24 @@ const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 const app = document.getElementById("app");
 
-if(id && certificates[id]){
+if (id && certificates[id]) {
   const c = certificates[id];
   app.innerHTML = `
     <div class="card">
       <h2>Certificate Verified ✅</h2>
       <p class="ok">This certificate is authentic</p>
-      <p><b>Name:</b> ${c.name}</p>
-      <p><b>Course:</b> ${c.course}</p>
-      <p><b>Instructor:</b> ${c.instructor}</p>
-      <p><b>Date:</b> ${c.date}</p>
-      <p><b>Certificate ID:</b> ${id}</p>
+      <p><strong>Name:</strong> ${c.name}</p>
+      <p><strong>Course:</strong> ${c.course}</p>
+      <p><strong>Instructor:</strong> ${c.instructor}</p>
+      <p><strong>Date:</strong> ${c.date}</p>
+      <p><strong>Certificate ID:</strong> ${id}</p>
     </div>
   `;
-}else{
+} else {
   app.innerHTML = `
     <div class="card">
       <h2 class="err">Invalid Certificate ❌</h2>
-      <p>No record found</p>
+      <p>No record found for this certificate ID.</p>
     </div>
   `;
 }
@@ -72,4 +75,5 @@ if(id && certificates[id]){
 
 </body>
 </html>
+
 
