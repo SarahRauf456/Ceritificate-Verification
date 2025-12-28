@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <title>Certificate Verification</title>
@@ -11,66 +11,66 @@ body{
   display:flex;
   justify-content:center;
   align-items:center;
-  background:linear-gradient(135deg,#050b1f,#0b1a3a);
+  background:#0b0f2a;
   font-family:Arial, sans-serif;
-  color:#fff;
+  color:white;
 }
 .card{
-  background:rgba(255,255,255,0.08);
-  padding:30px;
-  border-radius:16px;
+  background:#11183a;
+  padding:25px;
+  border-radius:12px;
   width:90%;
-  max-width:480px;
+  max-width:450px;
   text-align:center;
 }
-h2{color:#00eaff}
-.ok{color:#4caf50}
-.err{color:#ff5252}
+.success{color:#4caf50}
+.error{color:#ff5252}
 </style>
-
 </head>
+
 <body>
 
-<div id="app">
-  <h2>Certificate Verification</h2>
-  <p>Loading certificate details...</p>
-</div>
+<div id="root">Loading...</div>
 
 <script>
-const certificates = {
-  "WD-001": {
-    name: "Sarah Sharma",
-    course: "Web Development – Build Your First Website",
-    instructor: "Sharfia",
-    date: "April 2024"
+document.addEventListener("DOMContentLoaded", function(){
+
+  const data = {
+    "WD-002": {
+      name: "Sarah Fathima",
+      course: "Web Development",
+      instructor: "Sharfia",
+      date: "April 2024"
+    }
+  };
+
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+  const root = document.getElementById("root");
+
+  if(id && data[id]){
+    const c = data[id];
+    root.innerHTML = `
+      <div class="card">
+        <h2>Certificate Verified ✅</h2>
+        <p class="success">This certificate is authentic</p>
+        <p><b>Name:</b> ${c.name}</p>
+        <p><b>Course:</b> ${c.course}</p>
+        <p><b>Instructor:</b> ${c.instructor}</p>
+        <p><b>Date:</b> ${c.date}</p>
+        <p><b>ID:</b> ${id}</p>
+      </div>
+    `;
+  } else {
+    root.innerHTML = `
+      <div class="card">
+        <h2 class="error">Invalid Certificate ❌</h2>
+        <p>No record found.</p>
+      </div>
+    `;
   }
-};
 
-const params = new URLSearchParams(window.location.search);
-const id = params.get("id");
-const app = document.getElementById("app");
-
-if (id && certificates[id]) {
-  const c = certificates[id];
-  app.innerHTML = `
-    <div class="card">
-      <h2>Certificate Verified ✅</h2>
-      <p class="ok">This certificate is authentic</p>
-      <p><strong>Name:</strong> ${c.name}</p>
-      <p><strong>Course:</strong> ${c.course}</p>
-      <p><strong>Instructor:</strong> ${c.instructor}</p>
-      <p><strong>Date:</strong> ${c.date}</p>
-      <p><strong>Certificate ID:</strong> ${id}</p>
-    </div>
-  `;
-} else {
-  app.innerHTML = `
-    <div class="card">
-      <h2 class="err">Invalid Certificate ❌</h2>
-      <p>No record found for this certificate ID.</p>
-    </div>
-  `;
-}
+});
 </script>
 
 </body>
